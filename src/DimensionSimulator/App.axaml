@@ -1,0 +1,76 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="DimensionSimulator.App"
+             RequestedThemeVariant="Dark">
+    <Application.Styles>
+        <FluentTheme />
+        <Style Selector="TextBlock">
+            <Setter Property="Foreground" Value="#D8E2F2" />
+        </Style>
+        <Style Selector="Button">
+            <Setter Property="Background" Value="#141B33" />
+            <Setter Property="Foreground" Value="#D8E2F2" />
+            <Setter Property="BorderBrush" Value="#26314F" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="10,6" />
+            <Setter Property="MinHeight" Value="32" />
+        </Style>
+        <Style Selector="Button:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#1C2547" />
+        </Style>
+        <Style Selector="ToggleButton">
+            <Setter Property="Background" Value="#141B33" />
+            <Setter Property="Foreground" Value="#9FB0CC" />
+            <Setter Property="BorderBrush" Value="#26314F" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="12,6" />
+            <Setter Property="MinHeight" Value="32" />
+        </Style>
+        <Style Selector="ToggleButton:checked /template/ ContentPresenter">
+            <Setter Property="Background" Value="#0E3A4A" />
+            <Setter Property="Foreground" Value="#5FE8FF" />
+            <Setter Property="BorderBrush" Value="#2B7A93" />
+        </Style>
+        <Style Selector="TextBox">
+            <Setter Property="Background" Value="#0E1526" />
+            <Setter Property="Foreground" Value="#D8E2F2" />
+            <Setter Property="BorderBrush" Value="#26314F" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="MinHeight" Value="32" />
+        </Style>
+        <Style Selector="ListBox">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+        <Style Selector="ListBoxItem">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Padding" Value="8,5" />
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="Foreground" Value="#C6D2E6" />
+        </Style>
+        <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#16203C" />
+        </Style>
+        <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+            <Setter Property="Background" Value="#0E3A4A" />
+        </Style>
+        <Style Selector="Slider">
+            <Setter Property="Foreground" Value="#37E0FF" />
+        </Style>
+        <Style Selector="ScrollBar">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+        <Style Selector=":is(Button).accent">
+            <Setter Property="Background" Value="#0B5568" />
+            <Setter Property="Foreground" Value="#9FF2FF" />
+            <Setter Property="BorderBrush" Value="#1E7E99" />
+        </Style>
+        <Style Selector="Expander">
+            <Setter Property="Foreground" Value="#D8E2F2" />
+        </Style>
+        <Style Selector="Expander /template/ ToggleButton#PART_header ContentPresenter">
+            <Setter Property="TextBlock.FontWeight" Value="SemiBold" />
+        </Style>
+    </Application.Styles>
+    <Application.Resources>
+    </Application.Resources>
+</Application>
