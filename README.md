@@ -1,3 +1,5 @@
+## THIS PROJECT USES GLM-5.3-FLASH TO GENERATE, IT CAN BE USED TO STUDY, EDITED OR MODIFIED UNDER THE MIT LICENSE
+
 # Dimension Simulator
 
 A 3D universe and higher-dimension simulator for Windows / macOS / Linux, built with
