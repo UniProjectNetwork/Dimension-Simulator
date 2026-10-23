@@ -1,0 +1,165 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:DimensionSimulator.Controls"
+        x:Class="DimensionSimulator.MainWindow"
+        Title="Dimension Simulator — from the Solar System to the 10th Dimension"
+        Width="1440" Height="880" MinWidth="1040" MinHeight="640"
+        Background="#04060F" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <x:Double x:Key="PanelWidth">300</x:Double>
+    </Window.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- ======= TOP BAR ======= -->
+        <Border Grid.Row="0" Background="#0A0F1EE6" BorderBrush="#1A2340" BorderThickness="0,0,0,1" Padding="12,8">
+            <Grid ColumnDefinitions="Auto,*,Auto,Auto,Auto">
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                    <TextBlock Text="◈" FontSize="20" Foreground="#37E0FF" VerticalAlignment="Center"/>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="DIMENSION SIMULATOR" FontSize="15" FontWeight="Bold"
+                                   Foreground="#EAF2FF" LetterSpacing="2"/>
+                        <TextBlock Text="Universe · Black Holes · 10 Dimensions" FontSize="10"
+                                   Foreground="#6C7C9C" Margin="0,-2,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                    <ToggleButton x:Name="TabSolar" IsChecked="True" Content="☉  Solar System" Click="OnTabSolar"/>
+                    <ToggleButton x:Name="TabDeep" Content="✦  Deep Space" Click="OnTabDeep"/>
+                    <ToggleButton x:Name="TabDims" Content="⬡  Higher Dimensions" Click="OnTabDims"/>
+                </StackPanel>
+
+                <Button Grid.Column="3" Content="⌾  Screenshot" Classes="accent" Margin="10,0,0,0"
+                        Click="OnScreenshot" VerticalAlignment="Center"/>
+                <Button Grid.Column="4" Content="？ Help" Margin="6,0,0,0" Click="OnHelp" VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+
+        <!-- ======= MAIN AREA ======= -->
+        <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto">
+
+            <!-- LEFT: browser / dimension explorer -->
+            <Border Grid.Column="0" Width="300" Background="#080D1AE6" BorderBrush="#1A2340"
+                    BorderThickness="0,0,1,0" Padding="10">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" x:Name="BrowserTitle" Text="OBJECTS" FontSize="11"
+                               FontWeight="SemiBold" Foreground="#5FE8FF" LetterSpacing="2" Margin="2,4,0,8"/>
+
+                    <!-- universe browser -->
+                    <StackPanel x:Name="BrowserPanel" DockPanel.Dock="Top">
+                        <Border Background="#0C1326" CornerRadius="8" Padding="10,9" Margin="0,0,0,8"
+                                BorderBrush="#1A2745" BorderThickness="1">
+                            <StackPanel Spacing="7">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <TextBlock Text="DIMENSION WARP" FontSize="11" FontWeight="SemiBold"
+                                               Foreground="#5FE8FF" LetterSpacing="1" VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="WarpState" Text="3D · normal space" FontSize="10"
+                                               Foreground="#6C7C9C" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                </Grid>
+                                <WrapPanel x:Name="WarpButtons"/>
+                                <TextBlock x:Name="WarpCard" FontSize="10.8" Foreground="#AAB8D4" TextWrapping="Wrap"
+                                           Text="Select 4D-10D to throw the Solar System into higher-dimensional space: orbits twist, bodies swell and shrink as they rotate through hidden axes. 3D restores normal view."/>
+                            </StackPanel>
+                        </Border>
+
+                        <TextBox x:Name="SearchBox" Watermark="Search the universe…" TextChanged="OnSearch" Margin="0,0,0,8"/>
+                        <ListBox x:Name="BrowserList" MaxHeight="2000"
+                                 SelectionChanged="OnBrowserSelect" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Title}" FontSize="12.5" FontWeight="{Binding Weight}"
+                                                   Foreground="{Binding Brush}"/>
+                                        <TextBlock Text="{Binding Subtitle}" FontSize="10.5" Foreground="#6C7C9C"
+                                                   Margin="0,1,0,0" TextTrimming="CharacterEllipsis"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+
+                    <!-- dimension explorer -->
+                    <StackPanel x:Name="DimPanel" IsVisible="False" Spacing="10">
+                        <TextBlock Text="CHOOSE A DIMENSION" FontSize="11" FontWeight="SemiBold"
+                                   Foreground="#5FE8FF" LetterSpacing="1"/>
+                        <WrapPanel x:Name="DimButtons" HorizontalAlignment="Stretch"/>
+
+                        <TextBlock Text="SHAPE FAMILY" FontSize="11" FontWeight="SemiBold"
+                                   Foreground="#5FE8FF" LetterSpacing="1" Margin="0,6,0,0"/>
+                        <StackPanel Spacing="5">
+                            <Button x:Name="BtnHypercube" Content="Hypercube (2^n vertices)" Click="OnShapeHypercube" HorizontalAlignment="Stretch"/>
+                            <Button x:Name="BtnSimplex" Content="Simplex (n+1 vertices)" Click="OnShapeSimplex" HorizontalAlignment="Stretch"/>
+                            <Button x:Name="BtnOrthoplex" Content="Orthoplex (2n vertices)" Click="OnShapeOrthoplex" HorizontalAlignment="Stretch"/>
+                            <Button x:Name="BtnGlome" Content="Glome — 4D hypersphere" Click="OnShapeGlome" HorizontalAlignment="Stretch"/>
+                            <Button x:Name="BtnKlein" Content="Klein Bottle — 4D surface" Click="OnShapeKlein" HorizontalAlignment="Stretch"/>
+                        </StackPanel>
+
+                        <TextBlock Text="ROTATION SPEED" FontSize="10.5" Foreground="#6C7C9C" Margin="0,6,0,0"/>
+                        <Slider x:Name="RotSpeed" Minimum="0" Maximum="3" Value="1" ValueChanged="OnRotSpeed"/>
+                        <TextBlock Text="PROJECTION DISTANCE (nD → 3D)" FontSize="10.5" Foreground="#6C7C9C" Margin="0,6,0,0"/>
+                        <Slider x:Name="ProjDist" Minimum="1.2" Maximum="5" Value="2.2" ValueChanged="OnProjDist"/>
+
+                        <Border Background="#0C1326" CornerRadius="8" Padding="12" Margin="0,10,0,0">
+                            <StackPanel Spacing="6">
+                                <TextBlock x:Name="DimCardTitle" Text="Tesseract (Hypercube)" FontSize="14" FontWeight="Bold" Foreground="#5FE8FF"/>
+                                <TextBlock x:Name="DimCardMath" Text="" FontSize="11" Foreground="#93A7C9"/>
+                                <TextBlock x:Name="DimCardPhysics" Text="" FontSize="11.5" Foreground="#B9C6DE" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <!-- CENTER: viewport + HUD -->
+            <Panel Grid.Column="1">
+                <controls:UniverseCanvas x:Name="Canvas"/>
+
+                <!-- HUD overlay -->
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="14,0,0,14" Spacing="2"
+                            IsHitTestVisible="False">
+                    <TextBlock x:Name="HudDistance" Text="" FontSize="12" Foreground="#5FE8FF"/>
+                    <TextBlock x:Name="HudSpeed" Text="" FontSize="11.5" Foreground="#8FA1C2"/>
+                    <TextBlock x:Name="HudDate" Text="" FontSize="11.5" Foreground="#8FA1C2"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,14,14" Spacing="2"
+                            IsHitTestVisible="False">
+                    <TextBlock Text="Drag: orbit · Wheel: zoom · Right-drag: pan" FontSize="10.5" Foreground="#54627E"
+                               HorizontalAlignment="Right"/>
+                    <TextBlock Text="Click: select · Double-click: fly · Space: pause · O: orbits" FontSize="10.5"
+                               Foreground="#54627E" HorizontalAlignment="Right"/>
+                </StackPanel>
+                <Border x:Name="Toast" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,12,0,0"
+                        Background="#0E3A4AF0" CornerRadius="16" Padding="14,7" IsHitTestVisible="False" Opacity="0">
+                    <TextBlock x:Name="ToastText" Foreground="#9FF2FF" FontSize="12.5"/>
+                </Border>
+            </Panel>
+
+            <!-- RIGHT: info panel / dimension guide -->
+            <Border Grid.Column="2" Width="330" Background="#080D1AE6" BorderBrush="#1A2340"
+                    BorderThickness="1,0,0,0" Padding="12">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="InfoPanel" Spacing="4"/>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+
+        <!-- ======= BOTTOM BAR ======= -->
+        <Border Grid.Row="2" Background="#0A0F1EE6" BorderBrush="#1A2340" BorderThickness="0,1,0,0" Padding="14,8">
+            <Grid ColumnDefinitions="Auto,Auto,220,Auto,Auto,*,Auto,Auto">
+                <Button Grid.Column="0" x:Name="BtnPlay" Content="❚❚  Pause" Click="OnPlayPause" MinWidth="110"/>
+                <TextBlock Grid.Column="1" Text="Speed" VerticalAlignment="Center" Margin="16,0,8,0" Foreground="#8FA1C2"/>
+                <Slider Grid.Column="2" x:Name="SpeedSlider" Minimum="0" Maximum="1" Value="0.45"
+                        ValueChanged="OnSpeedChanged" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="3" x:Name="SpeedLabel" Text="" VerticalAlignment="Center" Margin="10,0,0,0"
+                           Foreground="#5FE8FF" FontSize="12" MinWidth="110"/>
+                <Button Grid.Column="5" Content="⟲  Reset time" Click="OnResetTime" HorizontalAlignment="Left" Margin="12,0,0,0"/>
+                <ToggleButton Grid.Column="6" x:Name="OrbitsToggle" Content="Orbit paths" IsChecked="True"
+                              Click="OnOrbitsToggle" HorizontalAlignment="Right"/>
+                <ToggleButton Grid.Column="7" x:Name="LabelsToggle" Content="Realistic scale: OFF" IsChecked="False"
+                              Click="OnScaleToggle" HorizontalAlignment="Right" Margin="8,0,0,0"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
